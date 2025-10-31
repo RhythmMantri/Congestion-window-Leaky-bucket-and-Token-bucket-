@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCP Congestion Window Simulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>TCP Congestion Window Simulation</h1>
+            <p>Visualizing cwnd changes with Leaky Bucket and Token Bucket traffic shaping</p>
+        </header>
+
+        <main>
+            <section class="controls">
+                <h2>Simulation Controls</h2>
+                <div class="control-group">
+                    <label for="algorithm">Congestion Control Algorithm:</label>
+                    <select id="algorithm">
+                        <option value="tahoe">TCP Tahoe</option>
+                        <option value="reno">TCP Reno</option>
+                        <option value="cubic">TCP CUBIC</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="trafficModel">Traffic Shaping Model:</label>
+                    <select id="trafficModel">
+                        <option value="leaky">Leaky Bucket</option>
+                        <option value="token">Token Bucket</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="packetRate">Packet Generation Rate:</label>
+                    <input type="range" id="packetRate" min="1" max="100" value="50">
+                    <span id="rateValue">50</span> packets/sec
+                </div>
+
+                <div class="control-group">
+                    <label for="bufferSize">Buffer Size:</label>
+                    <input type="range" id="bufferSize" min="10" max="1000" value="100">
+                    <span id="bufferValue">100</span> packets
+                </div>
+
+                <button id="startBtn">Start Simulation</button>
+                <button id="resetBtn">Reset Simulation</button>
+                <button id="plotBtn">Generate Plot</button>
+            </section>
+
+            <section class="visualization">
+                <h2>Simulation Visualization</h2>
+                <div class="charts">
+                    <div class="chart-container">
+                        <h3>Congestion Window Size</h3>
+                        <canvas id="cwndChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Buffer Status</h3>
+                        <canvas id="bufferChart"></canvas>
+                    </div>
+                </div>
+                <div class="plot-container" id="plotContainer">
+                    <p>Click "Generate Plot" to view the simulation results graph.</p>
+                </div>
+                <div class="stats">
+                    <h3>Real-time Statistics</h3>
+                    <div class="stat-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Current cwnd:</span>
+                            <span class="stat-value" id="currentCwnd">1</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Packets Sent:</span>
+                            <span class="stat-value" id="packetsSent">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Packets Dropped:</span>
+                            <span class="stat-value" id="packetsDropped">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Transmission Rate:</span>
+                            <span class="stat-value" id="transmissionRate">0</span> packets/sec
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="explanation">
+                <h2>About the Algorithms</h2>
+                <div class="algorithm-info">
+                    <h3>TCP Tahoe</h3>
+                    <p>Implementation of slow start, congestion avoidance, and fast retransmit.</p>
+                    
+                    <h3>TCP Reno</h3>
+                    <p>Includes all Tahoe features plus fast recovery algorithm.</p>
+                    
+                    <h3>TCP CUBIC</h3>
+                    <p>Uses a cubic function instead of linear growth for congestion avoidance.</p>
+                    
+                    <h3>Leaky Bucket</h3>
+                    <p>Outputs packets at a constant rate, smoothing bursty traffic.</p>
+                    
+                    <h3>Token Bucket</h3>
+                    <p>Allows bursts of traffic up to a limit, controlled by token generation.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Computer Networks Project - TCP Congestion Window Simulation</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

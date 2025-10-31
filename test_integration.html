@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Integration Test</title>
+</head>
+<body>
+    <h1>Integration Test</h1>
+    <button id="testBtn">Test Backend Connection</button>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('testBtn').addEventListener('click', async function() {
+            try {
+                const response = await fetch('http://localhost:5000/', {
+                    method: 'GET'
+                });
+                const data = await response.json();
+                document.getElementById('result').innerHTML = '<p style="color: green;">Success: ' + JSON.stringify(data) + '</p>';
+            } catch (error) {
+                document.getElementById('result').innerHTML = '<p style="color: red;">Error: ' + error.message + '</p>';
+            }
+        });
+    </script>
+</body>
+</html>
